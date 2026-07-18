@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Shieldly gh extension — AI-Powered Security Analysis for AWS from the GitHub CLI.
+# Thin wrapper around @shieldly/cli. Requires Node.js 22+ (npx).
+#
+#   gh shieldly analyze-iam policy.json
+#   gh shieldly analyze-cf template.yml
+#   gh shieldly agent-scan
+
+if ! command -v npx >/dev/null 2>&1; then
+  echo "gh-shieldly requires Node.js 22+ (npx not found). Install from https://nodejs.org" >&2
+  exit 1
+fi
+
+exec npx -y @shieldly/cli@latest "$@"
